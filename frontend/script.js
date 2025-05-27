@@ -1,5 +1,5 @@
 // URL base da API
-const apiUrl = "http://localhost:3002";
+const apiUrl = "https://twt1restapi-afgmoreira.onrender.com";
 
 // Variáveis para os modais de atualização
 const modal = document.getElementById("update-aluno-modal"); // Modal de atualização de aluno
@@ -11,7 +11,7 @@ const modalCurso = document.getElementById("update-curso-modal"); // Modal de at
 
 // Função para abrir o modal de atualização de aluno
 function openUpdateModal(aluno) {
-  currentAlunoId = aluno._id; // em vez de aluno.id
+  currentAlunoId = aluno._id;
   document.getElementById("modal-update-aluno-nome").value = aluno.nome; // Preenche o campo de nome
   document.getElementById("modal-update-aluno-apelido").value = aluno.apelido; // Preenche o campo de apelido
 
@@ -24,7 +24,7 @@ function openUpdateModal(aluno) {
     .then(cursos => {
       cursos.forEach(curso => {
         const option = document.createElement("option");
-        option.value = curso._id; // em vez de curso.id
+        option.value = curso._id; 
         option.textContent = curso.nome; // Define o texto como o nome do curso
         if (curso._id === aluno.curso) { // se curso for o _id do curso
           option.selected = true;
@@ -95,7 +95,7 @@ async function fetchAlunos() {
     // Botão de remover
     const deleteButton = document.createElement("buttonEliminar");
     deleteButton.textContent = "Remover";
-    deleteButton.onclick = () => deleteAluno(aluno._id); // em vez de aluno.id
+    deleteButton.onclick = () => deleteAluno(aluno._id); 
 
     // Adiciona os botões ao container
     buttonContainer.appendChild(updateButton);
@@ -130,7 +130,7 @@ async function fetchCursos() {
     // Botão de remover
     const deleteButton = document.createElement("buttonEliminar");
     deleteButton.textContent = "Remover";
-    deleteButton.onclick = () => deleteCurso(curso._id); // em vez de curso.id
+    deleteButton.onclick = () => deleteCurso(curso._id); 
 
     // Adiciona os botões ao container
     buttonContainer.appendChild(updateButton);
@@ -224,7 +224,7 @@ async function CursoSelect() {
   // Adiciona os cursos como opções na select box
   cursos.forEach(curso => {
     const option = document.createElement("option");
-    option.value = curso._id; // em vez de curso.id
+    option.value = curso._id;
     option.textContent = curso.nome; // Define o texto como o nome do curso
     cursoSelect.appendChild(option);
   });
