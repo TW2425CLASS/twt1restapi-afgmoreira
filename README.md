@@ -185,8 +185,8 @@ Abre o ficheiro `frontend/index.html` no navegador ou como o index.html no live 
 
 ## Deploy
 
-- **Frontend:** [URL do Vercel aqui]
-- **API:** [URL do Render aqui, se aplicável]
+- **Frontend:** [https://twt1restapi-afgmoreira.vercel.app](https://twt1restapi-afgmoreira.vercel.app)
+- **API:** [https://twt1restapi-afgmoreira.onrender.com](https://twt1restapi-afgmoreira.onrender.com)
 
 ---
 
