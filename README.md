@@ -150,4 +150,51 @@ projeto-raiz/
 ### Repositório Base
 
 Usa o repositório template inicial fornecido no GitHub Classroom.
-# TWT1RESTAPI
+
+---
+
+## Instruções para testar o projeto
+
+Instala-se o node-modules
+
+```
+npm install
+
+```
+
+### Mock-server (API simulada)
+
+1. Inicia o mock-server:
+   ```
+   npm run start:mock
+   ```
+   Acede a [http://localhost:3001](http://localhost:3001)
+
+### API real (Express + MongoDB)
+
+1. Inicia a API real:
+   ```
+   npm run start:api
+   ```
+   Acede a [http://localhost:3002](http://localhost:3002)
+
+### Frontend
+Abre o ficheiro `frontend/index.html` no navegador ou como o index.html no live Preview
+
+---
+
+## Deploy
+
+- **Frontend:** [URL do Vercel aqui]
+- **API:** [URL do Render aqui, se aplicável]
+
+---
+
+## Swagger
+
+A documentação da API está disponível em:  
+[http://localhost:3002/api-docs](http://localhost:3002/api-docs)
+
+---
+
+
