@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/VezZDIH2)
 # Trabalho Prático #1
 
 ## Consumo e Implementação de APIs RESTful
@@ -149,4 +150,51 @@ projeto-raiz/
 ### Repositório Base
 
 Usa o repositório template inicial fornecido no GitHub Classroom.
-# TWT1RESTAPI
+
+---
+
+## Instruções para testar o projeto
+
+Instala-se o node-modules
+
+```
+npm install
+
+```
+
+### Mock-server (API simulada)
+
+1. Inicia o mock-server:
+   ```
+   npm run start:mock
+   ```
+   Acede a [http://localhost:3001](http://localhost:3001)
+
+### API real (Express + MongoDB)
+
+1. Inicia a API real:
+   ```
+   npm run start:api
+   ```
+   Acede a [http://localhost:3002](http://localhost:3002)
+
+### Frontend
+Abre o ficheiro `frontend/index.html` no navegador ou como o index.html no live Preview
+
+---
+
+## Deploy
+
+- **Frontend:** [https://twt1restapi-afgmoreira.vercel.app](https://twt1restapi-afgmoreira.vercel.app)
+- **API:** [https://twt1restapi-afgmoreira.onrender.com](https://twt1restapi-afgmoreira.onrender.com)
+
+---
+
+## Swagger
+
+A documentação da API está disponível em:  
+[http://localhost:3002/api-docs](http://localhost:3002/api-docs)
+
+---
+
+

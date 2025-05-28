@@ -1,16 +1,30 @@
-
 {
   "alunos": [
     {
-      "nome": "Joana",
-      "apelido": "Silva",
-      "curso": 1,
-      "anoCurricular": 2,
-      "idade" : 21
+      "id": "cae8",
+      "nome": "André",
+      "apelido": "Moreira",
+      "cursoId": "c97f"
+    },
+    {
+      "id": "584f",
+      "nome": "Pedro",
+      "apelido": "Manuel",
+      "cursoId": "f64e"
     }
   ],
   "cursos": [
-    { "id" : 1, "nomeDoCurso": "Engenharia da Computação Gráfica e Multimédia" },
-    { "id" : 2, "nomeDoCurso": "Engenharia de Redes e Sistemas de Computadores" }
+    {
+      "id": "c97f",
+      "nome": "EOP"
+    },
+    {
+      "id": "f64e",
+      "nome": "ECGM"
+    },
+    {
+      "id": "853b",
+      "nome": "GESTAO"
+    }
   ]
 }
