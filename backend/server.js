@@ -1,20 +1,21 @@
+// Importação dos módulos necessários
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./docs/swagger');
-require('dotenv').config({ path: __dirname + '/../.env' }); // ou só '.env' se estiver na raiz
+require('dotenv').config({ path: __dirname + '/../.env' }); // Carrega variáveis de ambiente do .env
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // Permite CORS
+app.use(express.json()); // Permite receber JSON nos pedidos
 
-// LIGAÇÃO AO MONGODB ATLAS
+// LIGAÇÃO AO MONGODB ATLAS usando a variável de ambiente
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Ligado ao MongoDB Atlas!'))
   .catch(err => console.error('Erro ao ligar ao MongoDB:', err));
 
-// ESQUEMAS E MODELOS
+// ESQUEMAS E MODELOS MONGOOSE
 const CursoSchema = new mongoose.Schema({
   nome: String
 });
@@ -29,8 +30,7 @@ const AlunoSchema = new mongoose.Schema({
 });
 const Aluno = mongoose.model('Aluno', AlunoSchema);
 
-
-// ROTA INICIAL
+// ROTA INICIAL (GET /)
 /**
  * @swagger
  * /:
@@ -264,7 +264,9 @@ app.delete('/alunos/:id', async (req, res) => {
   res.sendStatus(204);
 });
 
+// Rota para servir a documentação Swagger em /api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Inicia o servidor na porta 3002
 const PORT = 3002;
 app.listen(PORT, () => console.log(`API real a correr em http://localhost:${PORT}`));
