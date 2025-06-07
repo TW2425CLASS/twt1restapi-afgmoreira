@@ -12,9 +12,14 @@ const modalCurso = document.getElementById("update-curso-modal"); // Modal de at
 // Função para abrir o modal de atualização de aluno
 function openUpdateModal(aluno) {
   currentAlunoId = aluno._id;
-  document.getElementById("modal-update-aluno-nome").value = aluno.nome;
-  document.getElementById("modal-update-aluno-apelido").value = aluno.apelido;
-  document.getElementById("modal-update-aluno-ano").value = aluno.anoCurso || ""; // Preenche o ano curricular
+
+  const nomeInput = document.getElementById("modal-update-aluno-nome");
+  const apelidoInput = document.getElementById("modal-update-aluno-apelido");
+  const anoInput = document.getElementById("modal-update-aluno-ano"); // Verifica se o elemento existe
+
+  if (nomeInput) nomeInput.value = aluno.nome;
+  if (apelidoInput) apelidoInput.value = aluno.apelido;
+  if (anoInput) anoInput.value = aluno.anoCurso || ""; // Preenche o ano curricular apenas se o elemento existir
 
   const cursoSelect = document.getElementById("modal-update-aluno-curso");
   cursoSelect.innerHTML = "";
