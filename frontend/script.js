@@ -83,7 +83,21 @@ async function fetchAlunos() {
 
   alunos.forEach(aluno => {
     const li = document.createElement("li");
-    li.textContent = `${aluno.nome} ${aluno.apelido} (Curso ID: ${aluno.curso || "null"}, Ano: ${aluno.anoCurso || "null"})`; // Exibe o ano curricular
+
+    // Container para as informações do aluno
+    const alunoInfo = document.createElement("div");
+    alunoInfo.className = "aluno-info";
+
+    const nomeApelido = document.createElement("div");
+    nomeApelido.className = "nome-apelido";
+    nomeApelido.textContent = `${aluno.nome} ${aluno.apelido}`;
+
+    const detalhes = document.createElement("div");
+    detalhes.className = "detalhes";
+    detalhes.textContent = `(Curso ID: ${aluno.curso || "null"}, Ano: ${aluno.anoCurso || "null"})`;
+
+    alunoInfo.appendChild(nomeApelido);
+    alunoInfo.appendChild(detalhes);
 
     const buttonContainer = document.createElement("div");
 
@@ -98,6 +112,7 @@ async function fetchAlunos() {
     buttonContainer.appendChild(updateButton);
     buttonContainer.appendChild(deleteButton);
 
+    li.appendChild(alunoInfo);
     li.appendChild(buttonContainer);
     alunosList.appendChild(li);
   });
