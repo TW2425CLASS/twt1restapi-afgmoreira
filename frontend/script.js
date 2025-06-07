@@ -12,28 +12,28 @@ const modalCurso = document.getElementById("update-curso-modal"); // Modal de at
 // Função para abrir o modal de atualização de aluno
 function openUpdateModal(aluno) {
   currentAlunoId = aluno._id;
-  document.getElementById("modal-update-aluno-nome").value = aluno.nome; // Preenche o campo de nome
-  document.getElementById("modal-update-aluno-apelido").value = aluno.apelido; // Preenche o campo de apelido
+  document.getElementById("modal-update-aluno-nome").value = aluno.nome;
+  document.getElementById("modal-update-aluno-apelido").value = aluno.apelido;
+  document.getElementById("modal-update-aluno-ano").value = aluno.anoCurso || ""; // Preenche o ano curricular
 
-  // Preenche a select box com os cursos
   const cursoSelect = document.getElementById("modal-update-aluno-curso");
-  cursoSelect.innerHTML = ""; // Limpa as opções existentes
+  cursoSelect.innerHTML = "";
 
   fetch(`${apiUrl}/cursos`)
     .then(response => response.json())
     .then(cursos => {
       cursos.forEach(curso => {
         const option = document.createElement("option");
-        option.value = curso._id; 
-        option.textContent = curso.nome; // Define o texto como o nome do curso
-        if (curso._id === aluno.curso) { // se curso for o _id do curso
+        option.value = curso._id;
+        option.textContent = curso.nome;
+        if (curso._id === aluno.curso) {
           option.selected = true;
         }
         cursoSelect.appendChild(option);
       });
     });
 
-  modal.style.display = "block"; // Exibe o modal
+  modal.style.display = "block";
 }
 
 // Função para fechar o modal de aluno
@@ -50,58 +50,49 @@ closeCursoModalButton.onclick = () => {
 
 // Função para atualizar um aluno a partir do modal
 async function updateAlunoFromModal(event) {
-  event.preventDefault(); // Evita o comportamento padrão do formulário
-  const nome = document.getElementById("modal-update-aluno-nome").value; // Obtém o novo nome
-  const apelido = document.getElementById("modal-update-aluno-apelido").value; // Obtém o novo apelido
-  const curso = document.getElementById("modal-update-aluno-curso").value; // Obtém o novo curso ID
+  event.preventDefault();
+  const nome = document.getElementById("modal-update-aluno-nome").value;
+  const apelido = document.getElementById("modal-update-aluno-apelido").value;
+  const curso = document.getElementById("modal-update-aluno-curso").value;
+  const anoCurso = document.getElementById("modal-update-aluno-ano").value; // Obtém o ano curricular
 
-  // Cria o objeto com os dados atualizados
-  const alunoData = { nome, apelido, curso }; // em vez de cursoId
+  const alunoData = { nome, apelido, curso, anoCurso }; // Inclui o ano curricular
 
-  // Envia a requisição PATCH para atualizar o aluno
   await fetch(`${apiUrl}/alunos/${currentAlunoId}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(alunoData),
   });
 
-  modal.style.display = "none"; // Fecha o modal
-  fetchAlunos(); // Atualiza a lista de alunos
+  modal.style.display = "none";
+  fetchAlunos();
 }
 
 // Função para buscar e exibir alunos
 async function fetchAlunos() {
-  const responseAlunos = await fetch(`${apiUrl}/alunos`); // Faz a requisição GET para obter os alunos
-  const alunos = await responseAlunos.json(); // Converte a resposta para JSON
+  const responseAlunos = await fetch(`${apiUrl}/alunos`);
+  const alunos = await responseAlunos.json();
 
-  const alunosList = document.getElementById("alunos-list"); // Obtém o elemento da lista de alunos
-  alunosList.innerHTML = ""; // Limpa a lista
+  const alunosList = document.getElementById("alunos-list");
+  alunosList.innerHTML = "";
 
-  // Itera sobre os alunos e cria os elementos da lista
   alunos.forEach(aluno => {
     const li = document.createElement("li");
+    li.textContent = `${aluno.nome} ${aluno.apelido} (Curso ID: ${aluno.curso || "null"}, Ano: ${aluno.anoCurso || "null"})`; // Exibe o ano curricular
 
-    // Exibe o nome e apelido do aluno e o ID do curso
-    li.textContent = `${aluno.nome} ${aluno.apelido} (Curso ID: ${aluno.curso || "null"})`;
-
-    // Container para os botões
     const buttonContainer = document.createElement("div");
 
-    // Botão de atualizar
     const updateButton = document.createElement("buttonAtualizar");
     updateButton.textContent = "Atualizar";
     updateButton.onclick = () => openUpdateModal(aluno);
 
-    // Botão de remover
     const deleteButton = document.createElement("buttonEliminar");
     deleteButton.textContent = "Remover";
-    deleteButton.onclick = () => deleteAluno(aluno._id); 
+    deleteButton.onclick = () => deleteAluno(aluno._id);
 
-    // Adiciona os botões ao container
     buttonContainer.appendChild(updateButton);
     buttonContainer.appendChild(deleteButton);
 
-    // Adiciona o container ao item da lista
     li.appendChild(buttonContainer);
     alunosList.appendChild(li);
   });
@@ -148,12 +139,13 @@ async function addAluno(event) {
   const nome = document.getElementById("aluno-nome").value; // Obtém o nome do aluno
   const apelido = document.getElementById("aluno-apelido").value; // Obtém o apelido do aluno
   const curso = document.getElementById("aluno-curso").value; // Obtém o ID do curso selecionado
+  const anoCurso = document.getElementById("aluno-ano").value; // Obtém o ano curricular
 
   // Envia a requisição POST para adicionar o aluno
   await fetch(`${apiUrl}/alunos`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nome, apelido, curso }) // em vez de cursoId
+    body: JSON.stringify({ nome, apelido, curso, anoCurso }) // Inclui o ano curricular
   });
 
   document.getElementById("add-aluno-form").reset(); // Reseta o formulário
